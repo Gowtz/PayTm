@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import URL from "./URL";
+import URLS from "./URL";
 import type { node } from "./Types";
 
 interface usr {
@@ -18,7 +18,7 @@ export default function UserContexts({ children }: node) {
   useEffect(() => {
     const fetch = async() => {
       await axios
-        .get(`${URL}/api/v1/user/current`, {
+        .get(`${URLS}/api/v1/user/current`, {
           withCredentials: true,
         })
         .then((data) => setUser(data.data));

@@ -4,7 +4,7 @@ import Avatar from "./Avatar"
 import Button from "./Button"
 import Heading from "./Heading"
 import axios from 'axios'
-import URL from "../Utils/URL"
+import URLS from "../Utils/URL"
 
 
 export default function Header() {
@@ -12,7 +12,7 @@ export default function Header() {
     const {user,setUser} = useAuth()
     const navigate = useNavigate() 
     const logout = async()=>{
-      await axios.post(`${URL}/api/v1/user/logout`,{},{
+      await axios.post(`${URLS}/api/v1/user/logout`,{},{
         withCredentials:true
       }).then(()=>{navigate('/'),setUser("")})
     }

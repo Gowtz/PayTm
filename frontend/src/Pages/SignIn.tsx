@@ -5,7 +5,7 @@ import Heading from "../Components/Heading";
 import InputBox from "../Components/InputBox";
 import { useAuth } from "../Utils/UserContext";
 import { Navigate } from "react-router-dom";
-import URL from "../Utils/URL";
+import URLS from "../Utils/URL";
 
 
 export default function SignIn() {
@@ -18,7 +18,7 @@ export default function SignIn() {
         if ( email != "" || password != "") {
           await axios
             .post(
-                `${URL}/api/v1/user/signin`,
+                `${URLS}/api/v1/user/signin`,
               {  
                 email,
                 password,

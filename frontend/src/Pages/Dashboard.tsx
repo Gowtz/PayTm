@@ -5,7 +5,7 @@ import { useAuth } from "../Utils/UserContext";
 import { Navigate } from "react-router-dom";
 import Heading from "../Components/Heading";
 import axios from "axios";
-import URL from "../Utils/URL";
+import URLS from "../Utils/URL";
 import Users from '../Components/Users'
 import SubHeading from "../Components/SubHeading";
 
@@ -17,7 +17,7 @@ export default function Dashboard() {
   useEffect(() => {
     const getuser = async () => {
       await axios
-        .get(`${URL}/api/v1/user/getusers?filter=${filter}`, {
+        .get(`${URLS}/api/v1/user/getusers?filter=${filter}`, {
           withCredentials: true,
         })
         .then((data) => setUsers([...data.data.users]));
@@ -27,7 +27,7 @@ export default function Dashboard() {
   useEffect(() => {
     const getBalance = async () => {
       await axios
-        .get(`${URL}/api/v1/account/balance`, {
+        .get(`${URLS}/api/v1/account/balance`, {
           withCredentials: true,
         })
         .then((data) => setBalance(data.data.balance));

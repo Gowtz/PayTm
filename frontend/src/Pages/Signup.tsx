@@ -6,7 +6,7 @@ import SubHeading from "../Components/SubHeading";
 import { useAuth } from "../Utils/UserContext";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
-import URL from "../Utils/URL";
+import URLS from "../Utils/URL";
 
 export default function Signup() {
   const { user, setUser } = useAuth();
@@ -19,7 +19,7 @@ export default function Signup() {
     if (name !== "" || email != "" || password != "") {
       await axios
         .post(
-          `${URL}/api/v1/user/signup`,
+          `${URLS}/api/v1/user/signup`,
           {
             name,
             email,
