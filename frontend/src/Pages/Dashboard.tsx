@@ -12,7 +12,7 @@ import SubHeading from "../Components/SubHeading";
 export default function Dashboard() {
   const { user } = useAuth();
   const [filter, setFilter] = useState("");
-  const [users, setUsers] = useState<any>([]);
+  const [users, setUsers] = useState<any[]>([]);
   const [balance, setBalance] = useState("");
   useEffect(() => {
     const getuser = async () => {

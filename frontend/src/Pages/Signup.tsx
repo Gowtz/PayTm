@@ -4,11 +4,12 @@ import Heading from "../Components/Heading";
 import InputBox from "../Components/InputBox";
 import SubHeading from "../Components/SubHeading";
 import { useAuth } from "../Utils/UserContext";
-import { Navigate } from "react-router-dom";
 import axios from "axios";
 import URLS from "../Utils/URL";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const navigate = useNavigate()
   const { user, setUser } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -42,7 +43,7 @@ export default function Signup() {
     }
   };
   if (user?.id) {
-    return <Navigate to="/dashboard" replace={true} />;
+    return <>{ navigate("/dashboard")} </>;
   }
   if (!user?.id) {
     return (
