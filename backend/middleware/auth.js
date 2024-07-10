@@ -29,7 +29,7 @@ jwt.verify(token, process.env.JWT_SECRET, async(err, decodedToken) => {
       res.json({error:"Not authorized"})
     } else {
       const user = await User.findOne({ _id: decodedToken.id });
-      res.json({ id: user._id, name: user.name });
+      res.json({ id: user._id, name: user.name,email:user.email });
     }
   });
 }

@@ -51,7 +51,7 @@ const signIn = async (req, res) => {
     const user = await User.login(email, password);
     const token = genToken(user._id);
     res.cookie("jwt", token, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true });
-    res.status(201).json({ name: user.name, mail: user.email });
+    res.status(201).json({ id: user._id, name: user.name,email:user.email });
   } catch (err) {
     console.log(err);
     res.status(412).json(handlerror(err));
@@ -70,37 +70,36 @@ const signUp = async (req, res) => {
     const acc = await Account.create({ userId: user._id });
     const token = genToken(user._id);
     res.cookie("jwt", token, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true });
-    res.status(201).json({ name: user.name, mail: user.email });
+    res.status(201).json({ id: user._id, name: user.name,email:user.email });
   } catch (err) {
     console.log(err);
-    res.send(handlerror(err))
+    res.status(412).json(handlerror(err))
   }
 };
 
 // Geting Users for search request
 const getUsers = async (req, res) => {
   const filter = req.query.filter;
-  console.log(filter);
   try {
     const users = await User.find({
-      
-        
           name: {
             $regex: filter,
-          },
-      
-      
+          },      
     });
+    const data = users.map((ele) => {
+
+      return ({
+      id: ele.id,
+      name: ele.name,
+      mail: ele.email,
+    })}).slice(0,5)
     res.status(200).json({
-      users: users.map((ele) => ({
-        id: ele.id,
-        name: ele.name,
-        mail: ele.email,
-      })),
+      users:data.filter(ele => ele?.id != req?.userId) ,
     });
   } catch (error) {
     //TODO: Write catch Code later
     console.log(error);
+    
   }
 };
 
