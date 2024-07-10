@@ -1,4 +1,4 @@
-export default function InputBox({onChange,lable,data,type,error}:{onChange:any,lable:string,data:string,type:string,error:string}) {
+export default function InputBox({onChange,lable,data,type,error=""}:{onChange:any,lable:string,data:string,type:string,error:string}) {
   return (
     <>
   <label className="text-2xl">{lable}</label>
@@ -7,3 +7,5 @@ export default function InputBox({onChange,lable,data,type,error}:{onChange:any,
     </>
   )
 }
+
+InputBox.defaultProps = {error:""};
