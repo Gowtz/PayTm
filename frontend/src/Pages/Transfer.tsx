@@ -3,7 +3,7 @@ import Heading from "../Components/Heading";
 import InputBox from "../Components/InputBox";
 import Button from "../Components/Button";
 import axios from "axios";
-import URL from "../Utils/URL";
+import URLS from "../Utils/URL";
 import { useNavigate, useSearchParams } from "react-router-dom";
 export default function Transfer() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function Transfer() {
     if (amount > 1) {
       await axios
         .post(
-          `${URL}/api/v1/account/transaction`,
+          `${URLS}/api/v1/account/transaction`,
           {
             amount,
             to,
