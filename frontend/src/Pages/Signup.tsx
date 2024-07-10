@@ -13,6 +13,7 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState({ email: "", password: "" });
 
   const handleSubmit = async () => {
     if (name !== "" || email != "" || password != "") {
@@ -33,8 +34,11 @@ export default function Signup() {
           setEmail("");
           setName("");
           setPassword("");
+          setError({ email: "", password: "" })
         })
-        .catch((error) => console.log(error));
+        .catch((error) =>{ setError(error.response?.data.err);
+          console.log(error.response.data)
+        });
     }
   };
   if (user?.id) {
@@ -74,7 +78,10 @@ export default function Signup() {
                 lable="Email"
                 data="example@gmail.com"
                 type="email"
+                error={error?.email}
               />
+
+
               <InputBox
                 onChange={(e: {
                   target: { value: SetStateAction<string> };
@@ -84,8 +91,11 @@ export default function Signup() {
                 lable="Password"
                 data="Password"
                 type="password"
+                error={error?.password}
               />
             </div>
+
+
             <Button data={"Signup"} onClick={handleSubmit} />
             <p className="pt-3">
               Already have an account <a href="/signin">Signin</a>

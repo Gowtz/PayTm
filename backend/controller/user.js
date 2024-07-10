@@ -103,4 +103,15 @@ const getUsers = async (req, res) => {
   }
 };
 
-module.exports = { signIn, signUp, getUsers };
+ const logout = async (req, res) => {
+  try{
+
+    res.clearCookie("jwt");
+    res.json({ msg: "Logged Out" });
+  }
+  catch(error){
+    res.json("Error is "+error)
+  }
+};
+
+module.exports = { signIn, signUp, getUsers, logout };

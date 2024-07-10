@@ -12,6 +12,7 @@ export default function SignIn() {
     const { user, setUser } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error,setError]=useState({ email: "", password: "" })
     const handleSubmit = async () => {
   
         if ( email != "" || password != "") {
@@ -33,7 +34,9 @@ export default function SignIn() {
                 }
               console.log(data);
               
-            }).catch(error => console.log(error)
+            }).catch(error => {setError(error.response?.data.err)
+              console.log(error.response.data.err)
+            }
             );
         }
       };
@@ -50,8 +53,8 @@ export default function SignIn() {
           </div>
           <div className="my-5">
 
-          <InputBox onChange={(e: { target: { value: SetStateAction<string>; }; })=>{setEmail(e.target.value)}} lable="Email" data="example@gmail.com" type="email" />
-          <InputBox onChange={(e: { target: { value: SetStateAction<string>; }; })=>{setPassword(e.target.value)}} lable="Password" data="Password" type="password" />
+          <InputBox onChange={(e: { target: { value: SetStateAction<string>; }; })=>{setEmail(e.target.value)}} lable="Email" data="example@gmail.com" type="email" error={error?.email}/>
+          <InputBox onChange={(e: { target: { value: SetStateAction<string>; }; })=>{setPassword(e.target.value)}} lable="Password" data="Password" type="password" error={error?.password}/>
           </div>
           <Button onClick={handleSubmit} data={"SignIn"} />
           <p className="pt-3">Dont Have An Account? <a href="/signup">Signup</a></p>
